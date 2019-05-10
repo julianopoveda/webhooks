@@ -1,4 +1,5 @@
 ﻿using System;
+using Api.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -14,21 +15,21 @@ namespace Api.Controllers
         /// <param name="primeIndex">Posição do primo desejado</param>
         /// <returns>o número primo calculado</returns>
         ///<summary>
-        public int Post([FromBody] int primeIndex)
-        {
-            if (primeIndex < 1)
+        public int Post([FromBody] Prime prime)
+        {            
+            if (prime.primeIndex < 1)
             {
                 Response.StatusCode = 400;
                 return -1;
             }
 
-            if (primeIndex == 1)
+            if (prime.primeIndex == 1)
                 return 2;
             else
             {
                 try
                 {
-                    return CalculatePrime(primeIndex);
+                    return CalculatePrime(prime.primeIndex);
                 }
                 catch (Exception e)
                 {
@@ -75,5 +76,8 @@ namespace Api.Controllers
                 //TODO: log action                
             }
         }
+
+        [HttpGet]
+        public string Teste()=>"Hello world";
     }
 }
