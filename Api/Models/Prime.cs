@@ -20,25 +20,30 @@ namespace Api.Models
                 return -1;
             else if (PrimeIndex == 1)
                 return 2;
+            else if (PrimeIndex == 2)
+                return 3;
             else
             {
                 int prime = 1;
                 try
                 {
-                    for (int i = 1, j = 1; j < PrimeIndex; i++)
+                    for (int i = 2, j = 2; j < PrimeIndex; i++)
                     {
                         int primeCandidate = 2 * i + 1;
-                        int squareRoot = (int)Math.Floor(Math.Sqrt(primeCandidate));
-                        for (int divisonAttemp = 0; divisonAttemp < squareRoot; divisonAttemp++)
+                        int squareRoot = (int)Math.Ceiling(Math.Sqrt(primeCandidate));
+                        int divisionAttempt = 3;
+                        bool isNotPrime = true;
+                        while (divisionAttempt <= squareRoot)
                         {
-                            if (primeCandidate % divisonAttemp != 0)
-                                prime = primeCandidate;
-                            else
-                                break;//Caso exista um divisor o número não é primo e não há motivos para seguir no teste.
+                            isNotPrime = primeCandidate % divisionAttempt == 0;
+                            divisionAttempt += 2;
                         }
 
-                        if (prime == primeCandidate)
+                        if (!isNotPrime)
+                        {
+                            prime = primeCandidate;
                             j++;
+                        }
                     }
                     return prime;
                 }

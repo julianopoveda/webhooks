@@ -26,6 +26,14 @@ namespace ApiTest
         }
 
         [Fact]
+        public void SegundaPosicaoDeveSer3()
+        {
+            Prime prime = new Prime() { PrimeIndex = 2 };
+
+            Assert.Equal(3, prime.CalculatePrime(_eventId, _logger));
+        }
+
+        [Fact]
         public void DeveRetornarMenos1SePrimeIndexMenorQue1()
         {
             Prime prime = new Prime() { PrimeIndex = -4 };
