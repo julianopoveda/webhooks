@@ -26,20 +26,12 @@ namespace Api.Models
             {
                 int prime = 1;
                 try
-                {
-                    for (int i = 2, j = 2; j < PrimeIndex; i++)
-                    {
-                        int primeCandidate = 2 * i + 1;
-                        int squareRoot = (int)Math.Ceiling(Math.Sqrt(primeCandidate));
-                        int divisionAttempt = 3;
-                        bool isNotPrime = true;
-                        while (divisionAttempt <= squareRoot)
-                        {
-                            isNotPrime = primeCandidate % divisionAttempt == 0;
-                            divisionAttempt += 2;
-                        }
+                {                    
+                    for (int primeCandidate = 5, j = 2; j < PrimeIndex; primeCandidate += 2)
+                    {                
+                        bool isPrime = NumberIsPrime(primeCandidate);
 
-                        if (!isNotPrime)
+                        if (isPrime)
                         {
                             prime = primeCandidate;
                             j++;
@@ -52,6 +44,20 @@ namespace Api.Models
                     logger.LogInformation(eventId, "Finalizando método CalculatePrime com o primo {0}", prime);
                 }
             }
+        }
+
+        private bool NumberIsPrime(int primeCandidate)
+        {
+            int squareRoot = (int)Math.Ceiling(Math.Sqrt(primeCandidate));
+            int divisionAttempt = 3;
+            bool isNotPrime = false;
+            while (divisionAttempt <= squareRoot && !isNotPrime)
+            {
+                isNotPrime = primeCandidate % divisionAttempt == 0;
+                divisionAttempt += 2;
+            }
+
+            return !isNotPrime;
         }
     }
 }
