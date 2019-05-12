@@ -1,6 +1,7 @@
 ﻿using System;
 using Api.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Api.Controllers
 {
@@ -8,6 +9,11 @@ namespace Api.Controllers
     [ApiController]
     public class PrimesController : ControllerBase
     {
+        private readonly ILogger _logger;
+        private readonly EventId _eventId = new EventId();
+
+        public PrimesController(ILogger<PrimesController> logger) => _logger = logger;
+
         // POST api/values
         [HttpPost]
         ///<summary>
@@ -33,13 +39,14 @@ namespace Api.Controllers
                 }
                 catch (Exception e)
                 {
-                    //TODO: log error
+                    _logger.LogDebug(_eventId, e, "Ocorreu um erro ao calcular o primo de posicao {0}", prime.primeIndex);
+
                     Response.StatusCode = 400;
                     return -1;
                 }
                 finally
                 {
-                    //TODO: do someting
+                    _logger.LogInformation(_eventId, "Request para PrimeController método Post efetuado. Retornou status {0}", Response.StatusCode);
                 }
             }
         }
@@ -66,18 +73,13 @@ namespace Api.Controllers
                 }
                 return prime;
             }
-            catch (Exception e)
-            {
-                //TODO: log error
-                throw;
-            }
             finally
             {
-                //TODO: log action                
+                _logger.LogInformation(_eventId, "Finalizando método CalculatePrime com o primo {0}", prime);                
             }
         }
 
         [HttpGet]
-        public string Teste()=>"Hello world";
+        public string Teste() => "Hello world";
     }
 }
