@@ -22,15 +22,15 @@ namespace ApiTest
         {
             Prime prime = new Prime() { PrimeIndex = 1 };
 
-            Assert.Equal(2, prime.CalculatePrime(_eventId, _logger));
-        }
+            Assert.Equal(2, prime.CalculatePrimeByIndex(_eventId, _logger));
+        }        
 
         [Fact]
         public void SegundaPosicaoDeveSer3()
         {
             Prime prime = new Prime() { PrimeIndex = 2 };
 
-            Assert.Equal(3, prime.CalculatePrime(_eventId, _logger));
+            Assert.Equal(3, prime.CalculatePrimeByIndex(_eventId, _logger));
         }
 
         [Fact]
@@ -38,7 +38,7 @@ namespace ApiTest
         {
             Prime prime = new Prime() { PrimeIndex = -4 };
 
-            Assert.Equal(-1, prime.CalculatePrime(_eventId, _logger));
+            Assert.Equal(-1, prime.CalculatePrimeByIndex(_eventId, _logger));
         }
 
         [Fact]
@@ -46,7 +46,7 @@ namespace ApiTest
         {
             Prime prime = new Prime() { PrimeIndex = 8 };
 
-            Assert.Equal(19, prime.CalculatePrime(_eventId, _logger));
+            Assert.Equal(19, prime.CalculatePrimeByIndex(_eventId, _logger));
         }
     }
 }

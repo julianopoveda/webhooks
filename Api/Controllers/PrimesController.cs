@@ -25,7 +25,7 @@ namespace Api.Controllers
         {
             try
             {
-                int calculatedPrime = prime.CalculatePrime(_eventId, _logger);
+                int calculatedPrime = prime.CalculatePrimeByIndex(_eventId, _logger);
 
                 if (calculatedPrime < 1)
                     Response.StatusCode = 400;

@@ -14,7 +14,7 @@ namespace Api.Models
         /// <param name="eventId">id do evento de log atual</param>
         /// <param name="logger">estrutura de log para possíveis logs de execução</param>
         /// <returns>O primo na posição solicitada</returns>
-        public int CalculatePrime(EventId eventId, ILogger logger)
+        public int CalculatePrimeByIndex(EventId eventId, ILogger logger)
         {
             if (PrimeIndex < 1)
                 return -1;
